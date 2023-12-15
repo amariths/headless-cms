@@ -14,7 +14,6 @@ query {
       edges {
         node {
           namn
-          pris
           description {
             description
           }
