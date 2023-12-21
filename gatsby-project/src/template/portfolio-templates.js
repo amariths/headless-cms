@@ -9,7 +9,7 @@ import 'bootstrap/js/dist/dropdown';
 import Layout from "../components/layout"
 
 //sidans namn blir portfolio efter namnet på javascript-filen
-const SecondPage = () => {
+const Portfolio = (contentfulPage) => {
     const data = useStaticQuery(graphql`
 query {
 
@@ -32,10 +32,14 @@ query {
 )
 
    return (
-  <Layout>
+    <div>
+        <h2>{contentfulPage.title}</h2>
+        <span>portfolio template</span>
     <ul className="posts">
+
         {data.allContentfulPortfolioItems.edges.map((edge) => {
             return(
+
                 <li className="post" key={edge.node.id}>
                     <div class="card">
                     {edge.node.bild && <GatsbyImage class="card-img-top" alt={edge.node.namn} image={edge.node.bild.gatsbyImage} />}
@@ -55,11 +59,11 @@ query {
         })}
 
     </ul>
+    </div>
 
-  </Layout>
 )
     }
 
 export const Head = () => <title>Portfolio Page</title>
 
-export default SecondPage
+export default Portfolio
