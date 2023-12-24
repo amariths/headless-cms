@@ -51,15 +51,37 @@ object-fit:contain;
     min-height: 77.3vh;
 }
 
+.link-footer{
+text-decoration: none;
+color: white;
+position: relative;
+top: 4px;
+right: 52vh;
+margin-left: -150px;
+filter: brightness(70%);
+font-size: 24px;
+}
+
+.link-footer:hover{
+    filter: brightness(100%);
+
+    }
+
+.list-footer {
+    list-style: none;
+}
+
 .footer {
+    display: flex;
     background-color: rgb(49, 49, 49);
     color: white;
-    height: 80px;
+    height: 90px;
     font-size: 30px;
     text-align: center;
     position: relative;
+    align-items: center;
     bottom: 0px;
-
+justify-content: center;
   width: 100%;
 }
 

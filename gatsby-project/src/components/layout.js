@@ -3,10 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/style.css';
 import {Link} from "gatsby";
 import UseNavigation from "../hooks/use-Navigation";
+import BottomNav from "../hooks/bottom-Navigation"
 
 const Layout = ({ children }) => {
 
-const navigation = UseNavigation()
+const top = UseNavigation()
+const bottom = BottomNav()
 
 
     return (
@@ -18,7 +20,7 @@ const navigation = UseNavigation()
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-        {navigation.map((edge) => {
+        {top.map((edge) => {
             return (
 
       <li class="nav-item active">
@@ -31,7 +33,21 @@ const navigation = UseNavigation()
   </div>
 </nav>
       <main className="main">{children}</main>
-      <footer className="footer">Footer</footer>
+
+
+
+      <footer className="footer">
+        <span>Footer</span>
+        <ul>
+           {bottom.map((edge) => {
+              return (
+                <li className="list-footer">
+                  <Link className="link-footer" href={edge.node.url}>{edge.node.title}</Link>
+                </li>
+              )
+            })}
+        </ul>
+        </footer>
     </div>
 
 )

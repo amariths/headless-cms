@@ -3,13 +3,13 @@ import { graphql, useStaticQuery } from 'gatsby'
 
 
 
-function UseNavigation() {
+function BottomNavigation() {
 
-    const top = useStaticQuery(graphql`
+    const bottom = useStaticQuery(graphql`
     query {
       allContentfulPage(
-        sort: {updatedAt: ASC}
-        filter: {navigation: {eq: "top-navigation"}}
+        sort: {url: ASC}
+        filter: {navigation: {eq: "bottom-navigation"}}
         ) {
         edges {
           node {
@@ -24,7 +24,7 @@ function UseNavigation() {
 
 
 
-  return top.allContentfulPage.edges;
+  return bottom.allContentfulPage.edges;
 }
 
-export default UseNavigation
+export default BottomNavigation

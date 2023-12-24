@@ -1,0 +1,6 @@
+[build]
+    command = "gatsby build"
+    publish = "public"
+     node_version = "18.13.0"
+[dev]
+    command = "gatsby develop"

@@ -1,4 +1,4 @@
-import * as React from "react"
+import React, {useState} from "react"
 import { Link } from "gatsby"
 import { graphql, useStaticQuery } from "gatsby"
 import { GatsbyImage } from 'gatsby-plugin-image'
@@ -10,6 +10,12 @@ import Layout from "../components/layout"
 
 //sidans namn blir portfolio efter namnet på javascript-filen
 const Portfolio = (contentfulPage) => {
+    const emptyQuery = ""
+    const [state, setState] = useState({
+      filteredData: [],
+      query: emptyQuery,
+    })
+
     const data = useStaticQuery(graphql`
 query {
 
@@ -31,13 +37,61 @@ query {
 `
 )
 
+const allposts = data.allContentfulPortfolioItems.edges
+
+const handleInputChange = event => {
+    console.log(event.target.value)
+    const query = event.target.value
+
+
+    // this is how we get all of our posts
+    const posts = data.allContentfulPortfolioItems.edges || []
+
+
+     // return all filtered posts
+    const filteredData = posts.filter(post => {
+      // destructure data from post frontmatter
+      const { description, namn } = post.node
+      return (
+        // standardize data with .toLowerCase()
+        // return true if the description, title or tags
+        // contains the query string
+        description.description.toLowerCase().includes(query.toLowerCase()) ||
+        namn.toLowerCase().includes(query.toLowerCase())
+      )
+    })
+
+    // update state according to the latest query and results
+    setState({
+      query, // with current query string from the `Input` event
+      filteredData, // with filtered data from posts.filter(post => (//filteredData)) above
+    })
+
+  }
+
+  const { filteredData, query } = state
+// if we have a fileredData in state and a non-emptyQuery then
+// searchQuery then `hasSearchResults` is true
+const hasSearchResults = filteredData && query !== emptyQuery
+
+// if we have a search query then return filtered data instead of all posts; else return allPosts
+const posts = hasSearchResults ? filteredData : allposts
+
+console.log(posts)
+
    return (
     <div>
         <h2>{contentfulPage.title}</h2>
         <span>portfolio template</span>
+        <input
+              type="text"
+              aria-label="Search"
+              placeholder="Type to filter posts..."
+              onChange={handleInputChange}
+          />
     <ul className="posts">
 
-        {data.allContentfulPortfolioItems.edges.map((edge) => {
+        {posts && posts.map((edge) => {
             return(
 
                 <li className="post" key={edge.node.id}>

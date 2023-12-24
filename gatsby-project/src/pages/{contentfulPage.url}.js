@@ -5,7 +5,9 @@ import AboutTemplate from '../template/about-template'
 import HomeTemplate from '../template/home-template'
 import LoginTemplate from '../template/login-templates'
 import PortfolioTemplate from '../template/portfolio-templates'
-
+import KontaktTemplate from '../template/kontakt-template'
+import PolicyTemplate from '../template/policy-templates'
+import KursTemplate from '../template/CMS-kurs-templates'
 
 
 
@@ -21,6 +23,12 @@ function Page(props) {
                     return <LoginTemplate {...contentfulPage} />;
                 case 'portfolio' :
                     return <PortfolioTemplate {...contentfulPage} />;
+                case 'kontakt' :
+                    return <KontaktTemplate {...contentfulPage} />;
+                case 'policy' :
+                    return <PolicyTemplate {...contentfulPage} />;
+                case 'cms-kurs' :
+                    return <KursTemplate {...contentfulPage} />;
                 default:
                     return <HomeTemplate {...contentfulPage} />;
             }
